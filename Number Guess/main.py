@@ -45,4 +45,6 @@ def game():
         elif guess != answer:
             print("Guess again.")
 
-game()
+while input("Do you want to play Number Guess Game?. Type 'y' or 'n': ") == "y":
+    print("\n" * 20)
+    game()
