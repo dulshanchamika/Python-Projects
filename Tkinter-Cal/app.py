@@ -36,6 +36,7 @@ class Calculator:
         self.entry_value+=str(value)
         self.equation.set(self.entry_value)
 
+
     def clear(self):
         self.entry_value=''
         self.equation.set(self.entry_value)
