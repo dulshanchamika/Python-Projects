@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accurate Location Tracker</title>
+</head>
+<body>
+    <h1>Accurate Location Tracker</h1>
+    <button id="getLocationBtn">Share Location</button>
+    <p id="status"></p>
+    <script>
+        const button = document.getElementById('getLocationBtn');
+        const status = document.getElementById('status');
+
+        button.addEventListener('click', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        const accuracy = position.coords.accuracy;
+
+                        status.innerHTML = `
+                            <strong>Latitude:</strong> ${latitude} <br>
+                            <strong>Longitude:</strong> ${longitude} <br>
+                            <strong>Accuracy:</strong> ${accuracy} meters`;
+
+                        // Send location to the server
+                        const response = await fetch('/send_location', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ latitude, longitude }),
+                        });
+
+                        const result = await response.json();
+                        if (result.status === "success") {
+                            window.location.href = "/map"; // Redirect to the map page
+                        }
+                    },
+                    (error) => {
+                        status.innerHTML = "Error fetching location. Please allow location access.";
+                        console.error("Error fetching location:", error);
+                    },
+                    { enableHighAccuracy: true } // Enable high-accuracy mode
+                );
+            } else {
+                status.textContent = "Geolocation is not supported by this browser.";
+            }
+        });
+    </script>
+</body>
+</html>

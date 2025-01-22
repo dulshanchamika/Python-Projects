@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Location</title>
+</head>
+<body>
+    <h1>Your Location</h1>
+    {% if location.error %}
+        <p>Error: {{ location.error }}</p>
+    {% else %}
+        <p><strong>City:</strong> {{ location.city }}</p>
+        <p><strong>Region:</strong> {{ location.region }}</p>
+        <p><strong>Country:</strong> {{ location.country }}</p>
+        <p><strong>Latitude:</strong> {{ location.latitude }}</p>
+        <p><strong>Longitude:</strong> {{ location.longitude }}</p>
+    {% endif %}
+</body>
+</html>
