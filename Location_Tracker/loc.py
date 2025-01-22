@@ -4,7 +4,7 @@ import folium
 from opencage.geocoder import OpenCageGeocode
 
 # Replace with your actual phone number (with country code)
-number = "+94701248512"  # Example number
+number = "+"  # Example number
 
 # Step 1: Parse the phone number
 parsed_number = phonenumbers.parse(number)
